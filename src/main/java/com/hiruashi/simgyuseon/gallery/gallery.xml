@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hiruashi.simgyuseon.gallery">
+	<insert id="create" parameterType="com.hiruashi.simgyuseon.gallery.Gallery">
+		INSERT INTO "IMG_TBL"(
+			"IMG_IDX",
+			"IMG_NM",
+			"IMG_FILE_NM",
+			"IMG_PATH",
+			"LCS",
+			"DATE"
+		)
+		VALUES (
+			(nextval('public.img_idx_seq')),
+			#{img_nm},
+			#{img_file_nm},
+			#{img_path},
+			#{lcs},
+			#{date}
+		)
+	</insert>
+	
+	<select id="getimg" parameterType="com.hiruashi.simgyuseon.gallery.Gallery" resultType="com.hiruashi.simgyuseon.gallery.Gallery">
+		SELECT * 
+		FROM "IMG_TBL" 
+		ORDER BY "IMG_IDX" DESC
+		OFFSET #{offset}
+		LIMIT #{limit}
+	</select>
+</mapper>

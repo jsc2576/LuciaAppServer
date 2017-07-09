@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hiruashi.simgyuseon.schedule">
+
+	<insert id="create" parameterType="com.hiruashi.simgyuseon.schedule.Schedule">
+		INSERT INTO "SCH_TBL"(
+			"SCH_IDX",
+			"SCH_NM",
+			"SCH_STA_YEAR",
+			"SCH_STA_MONTH",
+			"SCH_STA_DATE",
+			"SCH_END_YEAR",
+			"SCH_END_MONTH",
+			"SCH_END_DATE"
+		)VALUES(
+			(nextval('public.sch_idx_seq')),
+			#{sch_nm},
+			#{sch_sta_year},
+			#{sch_sta_month},
+			#{sch_sta_date},
+			#{sch_end_year},
+			#{sch_end_month},
+			#{sch_end_date}
+			
+		)
+	</insert>
+	
+	<select id="getsch" parameterType="com.hiruashi.simgyuseon.schedule.Schedule" resultType="com.hiruashi.simgyuseon.schedule.Schedule">
+		SELECT *
+		FROM "SCH_TBL"
+		WHERE ("SCH_STA_YEAR" = #{sch_sta_year} and "SCH_STA_MONTH" = #{sch_sta_month})
+		OR ("SCH_END_YEAR" = #{sch_sta_year} and "SCH_END_MONTH" = #{sch_sta_month})
+	</select>
+</mapper>

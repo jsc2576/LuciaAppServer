@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hiruashi.simgyuseon.video">
+	<insert id="create" parameterType="com.hiruashi.simgyuseon.video.Video">
+		INSERT INTO "YTB_TBL"(
+			"VIDEO_IDX",
+			"VIDEO_NM",
+			"VIDEO_URL",
+			"LCS",
+			"DATE",
+			"CON_YM"
+		)
+		VALUES(
+			(nextval('public.video_idx_seq')),
+			#{video_nm},
+			#{video_url},
+			#{lcs},
+			#{date},
+			#{con_ym}
+		)
+	</insert>
+	
+	<select id="getvideourl" parameterType="com.hiruashi.simgyuseon.video.Video" resultType="com.hiruashi.simgyuseon.video.Video">
+		SELECT *
+		FROM "YTB_TBL"
+		WHERE "CON_YM" = #{con_ym}
+		ORDER BY "VIDEO_IDX" DESC
+	</select>
+	
+	<select id="getcondate" parameterType="com.hiruashi.simgyuseon.video.Video" resultType="com.hiruashi.simgyuseon.video.Video">
+		SELECT DISTINCT "CON_YM"
+		FROM "YTB_TBL"
+		ORDER BY "CON_YM" DESC
+	</select>
+</mapper>
